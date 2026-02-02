@@ -231,5 +231,3 @@ Nếu gặp vấn đề:
 3. Đảm bảo config.json đúng format JSON
 
 ---
-
-**Made with ❤️ by Claude AI**
