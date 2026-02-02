@@ -1,20 +1,20 @@
-# 🌐 PC Monitor Pro - Cloud Version
+# PC Monitor Pro - Cloud Version
 
-**Giám sát máy tính từ bất kỳ đâu qua Internet!**
-
----
-
-## 🎯 Tổng quan
-
-Phiên bản Cloud cho phép:
-- ✅ Giám sát máy tính từ **khác mạng LAN**
-- ✅ Xem dashboard từ **bất kỳ đâu** (điện thoại, máy tính khác)
-- ✅ **Miễn phí** hoàn toàn (sử dụng Supabase free tier)
-- ✅ **Không cần server** riêng
+**Giám sát máy tính từ xa qua Internet**
 
 ---
 
-## 📊 Kiến trúc
+## Tổng quan
+
+Phiên bản Cloud cho phép giám sát nhiều máy tính từ các địa điểm khác nhau:
+- Giám sát từ khác mạng LAN
+- Truy cập dashboard từ mọi thiết bị
+- Sử dụng hoàn toàn miễn phí (Supabase free tier)
+- Không cần tự dựng server
+
+---
+
+## Kiến trúc hệ thống
 
 ```
 ┌─────────────────┐                    ┌─────────────────┐
@@ -33,45 +33,44 @@ Phiên bản Cloud cho phép:
                     ▼
         ┌─────────────────────┐
         │   Dashboard Web     │
-        │   (Xem tu dien      │
-        │    thoai/may tinh)  │
+        │   (Xem từ điện      │
+        │    thoại/máy tính)  │
         └─────────────────────┘
 ```
 
 ---
 
-## 🚀 Hướng dẫn cài đặt
+## Hướng dẫn cài đặt
 
-### Bước 1: Tạo tài khoản Supabase (5 phút)
+### 1. Tạo tài khoản Supabase
 
-1. Truy cập: https://supabase.com
-2. Click **Start your project** → Đăng ký bằng GitHub/Google
-3. Click **New Project**
-   - Đặt tên: `pc-monitor`
-   - Đặt password database (lưu lại)
-   - Chọn region gần nhất (Singapore)
-4. Đợi 1-2 phút để tạo project
+Truy cập https://supabase.com và tạo project mới:
 
-### Bước 2: Tạo database table (2 phút)
+- Đăng ký bằng GitHub hoặc Google
+- Tạo project với tên tùy chọn (ví dụ: `pc-monitor`)
+- Chọn region gần nhất (khuyến nghị Singapore cho VN)
+- Lưu lại database password
 
-1. Trong Supabase Dashboard, vào **SQL Editor** (menu bên trái)
-2. Click **New Query**
-3. Copy toàn bộ nội dung file `docs/supabase_schema.sql`
-4. Paste vào editor
-5. Click **Run** (hoặc Ctrl+Enter)
-6. Thấy "Success" là OK!
+Thời gian: khoảng 5 phút
 
-### Bước 3: Lấy API keys
+### 2. Tạo database schema
 
-1. Vào **Settings** (icon bánh răng) → **API**
-2. Copy 2 thông tin:
-   - **Project URL**: `https://xxxxx.supabase.co`
-   - **anon public** key: `eyJhbGci...` (key dài)
+Trong Supabase Dashboard:
 
-### Bước 4: Cấu hình Collector
+1. Mở **SQL Editor** từ menu bên trái
+2. Tạo query mới
+3. Copy nội dung file `docs/supabase_schema.sql` vào editor
+4. Chạy query (Ctrl+Enter)
 
-1. Mở file `collector/config.json`
-2. Dán thông tin vừa copy:
+### 3. Lấy API credentials
+
+Vào **Settings** → **API** và copy:
+- Project URL: `https://xxxxx.supabase.co`
+- anon public key: chuỗi token bắt đầu bằng `eyJhbGci...`
+
+### 4. Cấu hình Collector
+
+Sửa file `collector/config.json`:
 
 ```json
 {
@@ -81,55 +80,44 @@ Phiên bản Cloud cho phép:
 }
 ```
 
-3. Save file
+### 5. Cài đặt Collector trên từng máy
 
-### Bước 5: Chạy Collector trên mỗi máy
+Copy thư mục `collector` vào máy cần giám sát, sau đó:
 
-1. Copy thư mục `collector` vào mỗi máy cần giám sát
-2. Chạy `SETUP.bat` (lần đầu)
-3. Chạy `START_COLLECTOR.bat`
+1. Chạy `SETUP.bat` (chỉ lần đầu)
+2. Chạy `START_COLLECTOR.bat`
 
-### Bước 6: Xem Dashboard
+### 6. Chạy Dashboard
 
-**Cách 1: Chạy local**
+**Local:**
 ```bash
 cd dashboard
 pip install flask
 python app.py
-# Mở http://127.0.0.1:5555
 ```
+Truy cập: http://127.0.0.1:5555
 
-**Cách 2: Deploy lên Vercel/Render (xem bên dưới)**
+**Production:** xem phần Deploy bên dưới
 
 ---
 
-## 🌍 Deploy Dashboard lên Internet
+## Deploy Dashboard
 
-### Option A: Deploy lên Render (Khuyên dùng)
+### Deploy lên Render
 
-1. Tạo tài khoản: https://render.com
+1. Đăng ký tài khoản tại https://render.com
+2. Tạo Web Service mới:
+   - Runtime: Python 3
+   - Build Command: `pip install -r requirements.txt`
+   - Start Command: `gunicorn app:app`
+3. Thêm Environment Variables:
+   - `SUPABASE_URL`
+   - `SUPABASE_KEY`
+4. Deploy và nhận URL dạng: `https://pc-monitor-dashboard.onrender.com`
 
-2. Click **New** → **Web Service**
+### Deploy lên Vercel
 
-3. Connect GitHub repo (hoặc upload code)
-
-4. Cấu hình:
-   - **Name**: `pc-monitor-dashboard`
-   - **Runtime**: Python 3
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn app:app`
-
-5. Thêm **Environment Variables**:
-   - `SUPABASE_URL` = your URL
-   - `SUPABASE_KEY` = your key
-
-6. Click **Create Web Service**
-
-7. Đợi deploy xong → Có URL dạng: `https://pc-monitor-dashboard.onrender.com`
-
-### Option B: Deploy lên Vercel
-
-1. Tạo file `vercel.json` trong thư mục `dashboard`:
+Tạo file `vercel.json`:
 ```json
 {
   "builds": [{"src": "app.py", "use": "@vercel/python"}],
@@ -137,97 +125,91 @@ python app.py
 }
 ```
 
-2. Cài Vercel CLI: `npm i -g vercel`
-
-3. Deploy:
+Sau đó:
 ```bash
+npm i -g vercel
 cd dashboard
 vercel --prod
 ```
 
-4. Thêm Environment Variables trên Vercel Dashboard
+Cấu hình Environment Variables trên Vercel Dashboard.
 
 ---
 
-## 📱 Xem trên điện thoại
+## Truy cập trên mobile
 
-Sau khi deploy, bạn có thể:
-1. Mở URL dashboard trên trình duyệt điện thoại
-2. Add to Home Screen để truy cập nhanh
-3. Xem real-time từ bất kỳ đâu!
+Sau khi deploy, mở URL dashboard trên trình duyệt mobile và thêm vào Home Screen để truy cập nhanh.
 
 ---
 
-## ⚙️ Cấu hình nâng cao
+## Cấu hình nâng cao
 
-### Thay đổi tần suất thu thập
+### Điều chỉnh tần suất thu thập
 
 Sửa `config.json`:
 ```json
 {
-    "COLLECT_INTERVAL": 60  // Thu thập mỗi 60 giây
+    "COLLECT_INTERVAL": 60  
 }
 ```
 
-**Khuyến nghị:**
-- 30s: Giám sát real-time
-- 60s: Cân bằng
-- 300s (5 phút): Tiết kiệm quota
+Khuyến nghị:
+- 30 giây: real-time
+- 60 giây: cân bằng
+- 300 giây: tiết kiệm quota
 
 ### Giới hạn Supabase Free Tier
 
-| Resource | Giới hạn | Đủ cho |
+| Tài nguyên | Giới hạn | Ghi chú |
 |----------|----------|--------|
 | Database | 500MB | ~10 triệu records |
-| API requests | 50K/tháng | ~23 máy x 30s interval |
-| Bandwidth | 2GB/tháng | Đủ dùng |
+| API requests | 50K/tháng | ~23 máy với interval 30s |
+| Bandwidth | 2GB/tháng | Đủ cho hầu hết use case |
 
 ---
 
-## 🔧 Troubleshooting
+## Xử lý lỗi thường gặp
 
-### "Could not connect to Supabase"
+**Không kết nối được Supabase:**
 - Kiểm tra URL và Key trong config.json
 - Đảm bảo đã chạy SQL schema
-- Kiểm tra kết nối Internet
+- Xác nhận kết nối Internet
 
-### "Permission denied"
+**Permission denied:**
 - Vào Supabase → Table Editor → metrics
-- Click ⋮ → Edit table → Disable RLS (tạm thời để test)
+- Tạm thời disable RLS để test
 
-### Collector không gửi được data
-- Chạy `python cloud_collector.py` thủ công để xem lỗi
-- Kiểm tra firewall có chặn HTTPS không
+**Collector không gửi data:**
+- Chạy `python cloud_collector.py` để xem log chi tiết
+- Kiểm tra firewall
 
 ---
 
-## 📁 Cấu trúc thư mục
+## Cấu trúc thư mục
 
 ```
 PC_MONITOR_CLOUD/
-├── collector/              # Cài trên mỗi máy cần giám sát
-│   ├── cloud_collector.py  # Thu thập và gửi data
-│   ├── config.json         # Cấu hình Supabase
-│   ├── SETUP.bat          # Cài đặt lần đầu
-│   └── START_COLLECTOR.bat # Chạy collector
+├── collector/
+│   ├── cloud_collector.py
+│   ├── config.json
+│   ├── SETUP.bat
+│   └── START_COLLECTOR.bat
 │
-├── dashboard/              # Dashboard web
-│   ├── app.py             # Flask server
-│   ├── requirements.txt   # Dependencies
-│   ├── templates/         # HTML
-│   └── static/            # CSS, JS
+├── dashboard/
+│   ├── app.py
+│   ├── requirements.txt
+│   ├── templates/
+│   └── static/
 │
 └── docs/
-    └── supabase_schema.sql # SQL tạo database
+    └── supabase_schema.sql
 ```
 
 ---
 
-## 🆘 Hỗ trợ
+## Hỗ trợ
 
 Nếu gặp vấn đề:
-1. Kiểm tra console log của collector
-2. Kiểm tra Supabase Dashboard → Table Editor → metrics
-3. Đảm bảo config.json đúng format JSON
-
----
+1. Xem console log của collector
+2. Kiểm tra data trong Supabase Table Editor
+3. Xác nhận config.json đúng format JSON
