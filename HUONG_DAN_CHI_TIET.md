@@ -1,4 +1,4 @@
-# 🌐 PC Monitor Pro - Cloud Version
+#  PC Monitor Pro - Cloud Version
 
 ## HƯỚNG DẪN CÀI ĐẶT CHI TIẾT (Từng bước có hình)
 
@@ -80,7 +80,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im......
 ```
 (Key rất dài, copy HẾT)
 
-⚠️ **Lưu 2 thông tin này vào Notepad để dùng sau!**
+**Lưu 2 thông tin này vào Notepad để dùng sau!**
 
 ---
 
@@ -116,7 +116,7 @@ Thay đổi nội dung file `config.json`:
 }
 ```
 
-⚠️ **CHÚ Ý**:
+ **CHÚ Ý**:
 - Giữ nguyên dấu ngoặc kép `""`
 - Không thêm dấu phẩy sau dòng cuối
 - COLLECT_INTERVAL = 30 nghĩa là gửi data mỗi 30 giây
@@ -176,7 +176,7 @@ Thay đổi nội dung file `config.json`:
 
 4. Trình duyệt tự động mở: http://127.0.0.1:5555
 
-⚠️ Cách này chỉ xem được trên máy đang chạy Dashboard
+ Cách này chỉ xem được trên máy đang chạy Dashboard
 
 ---
 
@@ -371,7 +371,7 @@ services:
 6. Xem data trên Supabase hoặc deploy Dashboard
 ```
 
-**XONG!** 🎉
+**XONG!** 
 
 ---
 
@@ -384,4 +384,3 @@ Nếu gặp vấn đề, cung cấp thông tin sau:
 
 ---
 
-**Made with ❤️ by Claude AI**
