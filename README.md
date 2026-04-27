@@ -1,4 +1,4 @@
-# PC Monitor Pro - Cloud Version
+# PC Monitor Pro - Cloud Version v3.0
 
 **Giám sát máy tính từ xa qua Internet**
 

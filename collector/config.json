@@ -1,6 +1,6 @@
 {
-    "SUPABASE_URL": "https://fmnxhnhwuxroeuipmrnh.supabase.co",
-    "SUPABASE_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZtbnhobmh3dXhyb2V1aXBtcm5oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkzNDUzNjYsImV4cCI6MjA4NDkyMTM2Nn0.bzzfa6bbStGNbEHBhGpVIEmkdaClo3SkyNjhVP_D8ww",
+    "SUPABASE_URL": "",
+    "SUPABASE_KEY": "",
     "COLLECT_INTERVAL": 7,
     "MAX_RECORDS_PER_DAY": 20
 }

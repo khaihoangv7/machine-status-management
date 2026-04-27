@@ -1,5 +1,5 @@
 """
-PC Monitor Pro - Cloud Collector v2.1
+PC Monitor Pro - Cloud Collector v3.0
 - Thu thap moi 7 giay (co the thay doi)
 - Tu dong xoa khi vuot 20 records/ngay/may
 - Toi uu hieu nang cho may yeu
@@ -337,7 +337,7 @@ def run_collector():
     host = safe_hostname()
     
     print("=" * 55)
-    print("  PC Monitor Pro - Cloud Collector v2.2")
+    print("  PC Monitor Pro - Cloud Collector v3.0")
     print("=" * 55)
     print(f"  Computer    : {host}")
     print(f"  Local IP    : {get_local_ip()}")
